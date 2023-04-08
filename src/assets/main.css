@@ -1,0 +1,45 @@
+@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+}
+
+:root {
+  --cell-min-width: 8rem;
+  --cell-max-width: 8rem;
+  --cell-min-height: 2.5rem;
+  --max-w-2: 16rem;
+  --max-w-3: 24rem;
+  --max-w-4: 32rem;
+  --max-w-5: 40rem;
+  --max-w-6: 48rem;
+  --max-w-7: 56rem;
+  --max-w-8: 64rem;
+  --max-w-9: 72rem;
+  --max-w-10: 80rem;
+}

@@ -1,0 +1,121 @@
+Validate.js
+
+import {SPACE, EMPTY, COMMA} from "@/components/constants";
+
+export function preProcessing(input) {
+    //Remove dot from string
+    input = input.replace(SPACE, EMPTY)
+    //Replace spaces and create an array with all the numbers in it
+    const myArray = input.split(COMMA).map((number) => {
+        return parseFloat(number);
+    });
+    return myArray;
+}
+
+export default function analyse(myArray) {
+    //Check if each element is in range  (previous_element, previous_element + 1] including previous_element + 1
+    let check = true;
+    myArray.forEach((element, ind) => {
+        if (ind !== myArray.length - 1 && check) {
+            check = myArray[ind + 1] <= element + 1;
+        }
+    });
+    myArray.forEach((element, ind) => {
+        if (parseInt(element) < element && check) {
+            // if current element is not first element, check if previous element is decimal
+            check = (ind !== 0 && parseInt(myArray[ind - 1]) < myArray[ind - 1]) ||
+                // if current element is not last element, check if following element is decimal
+                (ind !== myArray.length - 1 && parseInt(myArray[ind + 1]) < myArray[ind + 1]);
+        }
+    });
+    return check;
+}
+_______________________________________________________________________
+Form.vue
+
+
+<template>
+  <div class="min-w-full">
+    <Message v-if="this.success!==null" :success="success"></Message>
+    <div v-else class="flex flex-col">
+      <div class="text-lg text-green-900 my-2"> Enter the natural numbers that will be separated with a comma and the sequence will end with a dot.</div>
+      <div class="flex">
+        <input type="text" v-model="userInput"
+               class="mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="1,2,3,4,5." required>
+        <button
+            class="bg-green-100 hover:bg-green-200 text-green-800 font-semibold py-2 px-4 rounded shadow"
+            @click="sendInput()">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Message from "@/components/Message.vue";
+import analyse, {preProcessing} from "@/components/Validate";
+
+export default {
+  name: "Form.vue",
+  components: {Message},
+  data() {
+    return {
+      userInput: null,
+      success: null
+    }
+  },
+  methods: {
+    sendInput() {
+      if (this.userInput) {
+        this.success = analyse(preProcessing(this.userInput));
+        setTimeout(() => this.success = null, 1500)
+      }
+    }
+  }
+}
+</script>
+<style scoped>
+</style>
+
+
+____________________________________________________________________
+Message.vue
+
+<template>
+  <div v-if="success" class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 pr-40 pl-5 py-8 shadow-md text-xl" role="alert">
+    <p class="font-bold">Input analyzed</p>
+    <p>Success</p>
+  </div>
+  <div v-else class="bg-orange-100 border-l-4 border-orange-500 rounded-b text-orange-700 pr-40 pl-5 py-8 shadow-md text-xl" role="alert">
+    <p class="font-bold">Input analyzed</p>
+    <p>Fail</p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Message",
+  props: {
+    success: false,
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+--------------------
+
+            const grid = [];
+            for (let i = 0; i < this.rows; i++) {
+              const row = [];
+              for (let j = 0; j < this.columns; j++) {
+                row.push("");
+              }
+              grid.push(row);
+            }
+            this.setTableData(grid);
