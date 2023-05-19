@@ -14,19 +14,22 @@
         Generate Table
       </button>
     </div>
-    <Message v-if="this.success===false" :message="message" :success="success"></Message>
-    <div v-else-if="!showDictionaryPage" class="flex flex-col">
-      <div class="text-lg text-gray-600 my-2 wid-50"> Enter the object sequence, subject sequence and the number of
+    <!-- <Message v-if="this.success===false" :message="message" :success="success"></Message> -->
+    <div v-else-if="!showDictionaryPage" class="flex flex-col  wid-50">
+      <!-- <div class="text-lg text-gray-600 my-2 wid-50"> Enter the object sequence, subject sequence and the number of
         rows
-      </div>
+      </div> -->
+      <label>Numebr of Rows</label>
       <input type="number" v-model="rows" min="1"
              class="border border-gray-300 text-gray-900 text-sm rounded-lg mb-2 p-2">
-      <!--      columnFields-->
-      <input type="text" v-model="objectInput"
+      <!--      rowFields-->
+      <label>Row Fields</label>
+      <input type="text" v-model="subjectInput"
              class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
              placeholder="1, 1.1, 1.2, 1.2.1, 1.2.2, 1.3, 2, 3" required>
-      <!--      rowFields-->
-      <input type="text" v-model="subjectInput"
+                   <!--      columnFields-->
+      <label>Column Fields</label>
+      <input type="text" v-model="objectInput"
              class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
              placeholder="1, 1.1, 1.2, 1.2.1, 1.2.2, 1.3, 2, 3" required>
       <button
@@ -49,6 +52,7 @@ import DataTable from "@/components/table/DataTable.vue";
 import DictionaryForm from "@/components/forms/DictionaryForm.vue";
 import getParentsWithNoChildren, {fillArrayEmpty} from "@/components/utils/helperMethods";
 import {mapActions} from "vuex";
+import {TOAST_FAIL} from "@/components/utils/constants";
 
 export default {
   name: "Form.vue",
@@ -66,6 +70,7 @@ export default {
       objectDictionary: {},
       showDataTable: false,
       seenNames: [],
+      TOAST_FAIL: TOAST_FAIL
     }
   },
   computed: {
@@ -123,7 +128,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setTableData']),
+    ...mapActions(['setTableData', 'setToastNotification']),
     generateTable() {
       this.showDataTable = true;
     },
@@ -146,6 +151,10 @@ export default {
         }
         if (this.success){
           this.setTableData(fillArrayEmpty(this.rows,this.columns));
+        }
+        if(this.success===false){
+          this.setToastNotification({show: true, message: this.message, type: TOAST_FAIL});
+          setTimeout(() => this.setToastNotification({show: false, message: "", type: ""}), 3000)
         }
       }
     },

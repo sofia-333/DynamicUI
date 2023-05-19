@@ -25,11 +25,10 @@
 <script>
 import {downloadJSONFile} from "@/components/utils/helperMethods";
 import {mapActions} from "vuex";
-import ToastNotification from "@/components/notifications/ToastNotification.vue";
+import {TOAST_SUCCESS} from "@/components/utils/constants";
 
 export default {
   name: "DictionaryForm",
-  components: {ToastNotification},
   props: {
     sequence: {
       required: true,
@@ -51,14 +50,15 @@ export default {
   data() {
     return {
       // dictionaryMap: {}
+      TOAST_SUCCESS: TOAST_SUCCESS
     }
   },
   methods: {
-    ...mapActions(['setDictionary', 'setShowNotification']),
+    ...mapActions(['setDictionary', 'setToastNotification']),
     saveDictionary() {
       this.setDictionary({dictionary: this.dictionaryMap, type: this.type});
-      this.setShowNotification({show: true, message: this.type + " Dictionary Saved Successfully"});
-      setTimeout(() => this.setShowNotification({show: false, message: ""}), 3000)
+      this.setToastNotification({show: true, message: this.type + " Dictionary Saved Successfully", type: TOAST_SUCCESS});
+      setTimeout(() => this.setToastNotification({show: false, message: "", type: ""}), 3000);
     },
     downloadDictionary() {
       downloadJSONFile(this.dictionaryMap, this.label.replace(" ", "_") + ".json")
