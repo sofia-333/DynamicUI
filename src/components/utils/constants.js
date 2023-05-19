@@ -6,3 +6,5 @@ export const DIGIT_DOTS_REGEX = new RegExp("/^\\d+(\\.\\d+)*$/");
 export const DOTS_REGEX = new RegExp("/\\./");
 export const NUMBERS_AFTER_DOTS = "/\\.\\d+$/"
 export const NUMBERS_AFTER_DOTS_REGEX = new RegExp("/\\.\\d+$/");
+export const TOAST_SUCCESS = 'success';
+export const TOAST_FAIL = 'fail';
