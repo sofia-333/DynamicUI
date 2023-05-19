@@ -31,6 +31,11 @@ export default function analyse(sequence, canHaveOneChild=true) {
         return [false, "Check if the sequence is sorted in ascending order"];
     }
 
+    //Check that there are no duplicates
+    if (sequence.length !== new Set(sequence).size) {
+        return [false, "Check that the sequence does not contain duplicates"];
+    }
+
     // Check if each parent element has at least 2 child elements
     if (!canHaveOneChild) {
         if (hasMoreThanOneChild(sequence) === false) {
