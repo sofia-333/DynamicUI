@@ -4,8 +4,11 @@ export default createStore({
     state: {
         subjectDictionary: {},
         objectDictionary: {},
-        showNotification: false,
-        showNotificationMessage: "",
+        toastNotification: {
+            show: false,
+            message: '',
+            type: ''
+        },
         tableData: {},
     },
     actions: {
@@ -16,8 +19,8 @@ export default createStore({
                 commit('setObjectDictionary', dictionary);
             }
         },
-        setShowNotification({commit}, payload) {
-            commit('setShowNotification', payload);
+        setToastNotification({commit}, payload) {
+            commit('setToastNotification', payload);
         },
         setTableData({commit}, payload) {
             commit('setTableData', payload);
@@ -33,9 +36,11 @@ export default createStore({
         setObjectDictionary: (state, dictionary) => {
             state.objectDictionary = dictionary;
         },
-        setShowNotification: (state, {show, message}) => {
-            state.showNotification = show;
-            state.showNotificationMessage = message;
+        setToastNotification: (state, {show, message, type}) => {
+            state.toastNotification.show = show;
+            state.toastNotification.message = message;
+            state.toastNotification.type = type;
+            console.log(state.toastNotification);
         },
     }
 });
