@@ -1,5 +1,5 @@
 import {SPACE, EMPTY, COMMA, DIGIT_DOTS_REGEX} from "@/components/utils/constants";
-import {hasMoreThanOneChild} from "@/components/utils/helperMethods";
+import {customSort, hasMoreThanOneChild} from "@/components/utils/helperMethods";
 
 
 export function preProcessing(input) {
@@ -27,7 +27,7 @@ export default function analyse(sequence, canHaveOneChild=true) {
     }
 
     // Check if the sequence is sorted in ascending order
-    if (sequence.join() !== sequence.slice().sort().join()) {
+    if (sequence.join() !== sequence.slice().sort(customSort).join()) {
         return [false, "Check if the sequence is sorted in ascending order"];
     }
 

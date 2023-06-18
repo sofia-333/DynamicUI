@@ -53,3 +53,29 @@ export function downloadJSONFile(data, fileName) {
     let blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
     saveAs(blob, fileName);
 }
+
+export function customSort(a, b) {
+    let partsA = a.toString().split('.');
+    let partsB = b.toString().split('.');
+
+    // Recursive comparison function
+    function compareParts(partsA, partsB, index) {
+        let partA = partsA[index] ? parseInt(partsA[index]) : 0;
+        let partB = partsB[index] ? parseInt(partsB[index]) : 0;
+
+        if (partA < partB) {
+            return -1;
+        } else if (partA > partB) {
+            return 1;
+        } else {
+            // Parts are equal, continue comparing the next parts recursively
+            if (index < Math.max(partsA.length, partsB.length) - 1) {
+                return compareParts(partsA, partsB, index + 1);
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    return compareParts(partsA, partsB, 0);
+}
