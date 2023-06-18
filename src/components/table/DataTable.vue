@@ -7,13 +7,13 @@
         </div>
       </div>
       <div class="border border-r-0">
-        <div class="p-2 min-w-4 text-xs text-center">
-          No
+        <div class="p-2 min-w-3 text-xs text-center">
+          Line<br>No
         </div>
       </div>
       <div class="border border-r-0">
-        <div class="p-2 min-w-3 text-xs text-center">
-          No
+        <div class="p-2 min-w-4 text-xs text-center">
+          Code
         </div>
       </div>
       <div class="border flex">
@@ -39,13 +39,13 @@
       </div>
     </div>
     <div class="flex flex-col border-l">
-      <div class="border-b text-center text-xs " v-for="(element, index) in subjectSequence" :key="index">
-        <div class="p-2 min-w-4 height-control "> {{ element }}</div>
+      <div class="border-b text-center text-xs" v-for="row in rows" :key="row">
+        <div class="p-2 min-w-3 height-control"> {{ row }}</div>
       </div>
     </div>
     <div class="flex flex-col border-l">
-      <div class="border-b text-center text-xs" v-for="row in rows" :key="row">
-        <div class="p-2 min-w-3 height-control "> {{ row }}</div>
+      <div class="border-b text-center text-xs " v-for="(element, index) in subjectSequence" :key="index">
+        <div class="p-2 min-w-4 height-control"> {{ element }}</div>
       </div>
     </div>
     <table-content :rows="rows" :columns="columns"/>
