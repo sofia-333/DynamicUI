@@ -19,10 +19,10 @@
       <div class="border flex">
         <div class="overflow-hidden" v-for="(node, index) in columnFields" :key="node.name"
              :class="{'border-r': index < columnFields.length - 1}">
-          <cell-content :node="node" :content-info="objectDictionary ? objectDictionary[node.name] : ''"></cell-content>
+          <cell-content :node="node" :content-info="objectDictionary ? objectDictionary[node.name] : ''"/>
           <div class="flex flex-row h-full" v-if="node.children && node.children.length">
             <div class="flex" v-for="(child,index) in node.children" :key="child.name">
-              <child-component :node="child" :rows="rows" :objectDictionary="objectDictionary"
+              <child-component :node="child" :objectDictionary="objectDictionary"
                                :border-right="index < node.children.length - 1"/>
             </div>
           </div>
@@ -48,23 +48,20 @@
         <div class="p-2 min-w-3 height-control "> {{ row }}</div>
       </div>
     </div>
-    <table-content :rows="rows" :columns="columns"></table-content>
+    <table-content :rows="rows" :columns="columns"/>
   </div>
   <button class="mt-3 disabled:bg-blue-100 bg-blue-200 text-blue-800 font-semibold py-2 px-4 rounded shadow"
           @click="saveTableData()">
     Save Table Content
   </button>
-
 </template>
 
 <script>
-
 import ChildComponent from "@/components/table/ChildComponent.vue";
 import CellContent from "@/components/table/CellContent.vue";
 import TableContent from "@/components/table/TableContent.vue";
 import {mapState} from "vuex";
 import {downloadJSONFile} from "@/components/utils/helperMethods";
-
 export default {
   name: "DataTable",
   components: {
@@ -128,9 +125,6 @@ export default {
 }
 </script>
 
-<!--1, 1.1, 1.2, 1.2.1, 1.2.2, 1.3, 2-->
-<!--1,1.1,1.2,1.2.1,1.2.1.1,1.2.1.2,1.2.2,1.2.3,1.3, 2, 3, 4-->
-<!--1, 2, 2.1, 2.2, 2.2.1, 2.2.2, 3, 3.1, 3.2, 4-->
 <style scoped>
 .wid-control {
   min-width: var(--cell-min-width);

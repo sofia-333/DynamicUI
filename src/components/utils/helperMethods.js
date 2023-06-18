@@ -53,18 +53,3 @@ export function downloadJSONFile(data, fileName) {
     let blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
     saveAs(blob, fileName);
 }
-
-// Check if each number followed by a number with a dot has more than one child
-// for (let i = 0; i < sequence.length - 1; i++) {
-//     const element = sequence[i];
-//     const nextElement = sequence[i + 1];
-//     if (/\d\.$/.test(element) && nextElement === `${element}1`) {
-//         let j = i + 1;
-//         while (j < sequence.length && sequence[j].startsWith(`${element}.`)) {
-//             j++;
-//         }
-//         if (j === i + 2) {
-//             return false;
-//         }
-//         i = j - 1;
-//     }}

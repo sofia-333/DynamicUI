@@ -14,7 +14,6 @@
         Generate Table
       </button>
     </div>
-    <!-- <Message v-if="this.success===false" :message="message" :success="success"></Message> -->
     <div v-else-if="!showDictionaryPage" class="flex flex-col  wid-50">
       <!-- <div class="text-lg text-gray-600 my-2 wid-50"> Enter the object sequence, subject sequence and the number of
         rows
@@ -46,7 +45,6 @@
 </template>
 
 <script>
-import Message from "@/components/notifications/Message.vue";
 import analyse, {preProcessing} from "@/components/utils/Validate";
 import DataTable from "@/components/table/DataTable.vue";
 import DictionaryForm from "@/components/forms/DictionaryForm.vue";
@@ -56,7 +54,7 @@ import {TOAST_FAIL} from "@/components/utils/constants";
 
 export default {
   name: "Form.vue",
-  components: {DictionaryForm, DataTable, Message},
+  components: {DictionaryForm, DataTable},
   data() {
     return {
       objectInput: "1, 2, 2.1, 2.2, 2.2.1, 2.2.2, 3, 3.1, 3.2, 4",

@@ -1,6 +1,7 @@
 <template>
   <p class="break-words inline-block m-0 text-xs"
-     :class="node.children && node.children.length ? `p-2 max-w-${getParentsWithNoChildren(node.children).length} height-control` : `p-2 wid-control height-control h-full`">
+     :class="node.children && node.children.length ? `p-2 max-w-${getParentsWithNoChildren(node.children).length}
+      height-control` : `p-2 wid-control height-control h-full`">
     [{{ node.name }}] {{ contentInfo }}
   </p>
 </template>

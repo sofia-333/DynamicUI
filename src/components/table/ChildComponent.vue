@@ -1,9 +1,10 @@
 <template>
   <div class="border-t overflow-hidden" :class="{'border-r': borderRight}">
-    <cell-content :node="node" :content-info="objectDictionary ? objectDictionary[node.name] : ''"></cell-content>
+    <cell-content :node="node" :content-info="objectDictionary ? objectDictionary[node.name] : ''"/>
     <div class="flex flex-row h-full" v-if="node.children && node.children.length">
       <div class="flex" v-for="(child, index) in node.children" :key="child.name">
-        <child-component :node="child" :rows="rows" :border-right="index < node.children.length - 1" :object-dictionary="objectDictionary"/>
+        <child-component :node="child" :border-right="index < node.children.length - 1"
+                         :object-dictionary="objectDictionary"/>
       </div>
     </div>
   </div>
@@ -19,10 +20,6 @@ export default {
   props: {
     node: {
       type: Object,
-      required: true
-    },
-    rows: {
-      type: Number,
       required: true
     },
     borderRight: {
