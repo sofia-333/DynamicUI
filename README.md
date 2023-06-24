@@ -1,6 +1,5 @@
-# bachelor-test
-
-This template should help get you started developing with Vue 3 in Vite.
+# Dynamic UI
+Vue.js application that helps users to create dynamic tables by specifying structure and the dictionary of the table.
 
 ## Recommended IDE Setup
 
